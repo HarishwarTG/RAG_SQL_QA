@@ -19,7 +19,7 @@ st.sidebar.write(
 
     This project utilizes GooglePalm LLM, Langchain, HuggingFace's Embedding model, and FAISS Vectorstore.
 
-    For more details, please visit the [GitHub repository](link-to-repo).
+    For more details, please visit the [GitHub repository](https://github.com/HarishwarTG/RAG_SQL_QA).
 
     **Note:** This is a personal learning project and does not include the original inventory database.
     """
