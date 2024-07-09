@@ -1,5 +1,5 @@
 from langchain.llms import GooglePalm
-
+import streamlit as st
 from langchain.utilities import SQLDatabase
 from langchain_experimental.sql import SQLDatabaseChain
 from langchain.prompts import SemanticSimilarityExampleSelector
@@ -16,8 +16,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-LANGCHAIN_TRACING_V2 = os.getenv("LANGCHAIN_TRACING_V2")
-LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
+LANGCHAIN_TRACING_V2 = st.secrets.LANGCHAIN_TRACING_V2
+LANGCHAIN_API_KEY = st.secrets.LANGCHAIN_API_KEY
 
 
 def create_sql_database(db_user, db_password, db_host, db_name):
@@ -99,11 +99,11 @@ def generate_final_output(chain,google_llm, question):
     return final_output
 
 def get_answer_to_question(question):
-    db_user = os.getenv("db_user")
-    db_password = os.getenv("db_password")
-    db_host = os.getenv("db_host")
-    db_name = os.getenv("db_name")
-    google_api_key = os.environ["GOOGLE_API_KEY"]
+    db_user = st.secrets.db_user
+    db_password = st.secrets.db_password
+    db_host = st.secrets.db_host
+    db_name = st.secrets.db_name
+    google_api_key = st.secrets.GOOGLE_API_KEY
 
     chain = get_few_shot_db_chain(db_user, db_password, db_host, db_name, google_api_key)
     google_llm = create_llm(google_api_key)
