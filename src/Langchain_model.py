@@ -100,10 +100,10 @@ def generate_final_output(chain,google_llm, question):
     return final_output
 
 def get_answer_to_question(question):
-    db_user = os.getenv("db_user")
-    db_password = os.getenv("db_password")
-    db_host = os.getenv("db_host")
-    db_name = os.getenv("db_name")
+    db_user = "root"
+    db_password = "root"
+    db_host = "localhost"
+    db_name = "wallmart_store"
     google_api_key = os.environ["GOOGLE_API_KEY"]
 
     chain = get_few_shot_db_chain(db_user, db_password, db_host, db_name, google_api_key)
