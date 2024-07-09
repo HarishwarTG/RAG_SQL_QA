@@ -36,3 +36,10 @@ if st.button("Get Answer"):
             st.write(answer)
     else:
         st.error("Please enter a question.")
+        
+        
+        
+st.markdown("---")
+st.write("We have a wide variety of t-shirts (Van Huesen, Levi's, Nike, Adidas) in various sizes (XS, S, M, L, XL) and colors (Red, Blue, Black, White).")
+st.write("Shoes come in different models (Nike Air Force, Jordan, Adidas Ultraboost, Puma RS-X, Reebok Classic, Bata Power, Nike Zoom) with various sizes and colors.")
+
