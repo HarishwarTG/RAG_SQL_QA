@@ -10,7 +10,6 @@ from langchain.chains.sql_database.prompt import PROMPT_SUFFIX, _mysql_prompt
 from langchain.prompts.prompt import PromptTemplate
 
 from src.few_shots_helper import few_shots, mysql_prompt ,final_prompt
-# from few_shots_helper import few_shots, mysql_prompt ,final_prompt
 
 
 import os
@@ -100,10 +99,10 @@ def generate_final_output(chain,google_llm, question):
     return final_output
 
 def get_answer_to_question(question):
-    db_user = "root"
-    db_password = "root"
-    db_host = "localhost"
-    db_name = "wallmart_store"
+    db_user = os.getenv("db_user")
+    db_password = os.getenv("db_password")
+    db_host = os.getenv("db_host")
+    db_name = os.getenv("db_name")
     google_api_key = os.environ["GOOGLE_API_KEY"]
 
     chain = get_few_shot_db_chain(db_user, db_password, db_host, db_name, google_api_key)

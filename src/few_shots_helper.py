@@ -33,25 +33,22 @@ few_shots = [
         'Answer': "17462"
     },
     {
-        'Question': "How many white color Levi's t-shirts do we have?",
-        'SQLQuery': "SELECT SUM(stock_quantity) FROM t_shirts WHERE brand = 'Levi' AND color = 'White'",
+        'Question': "Availability stock of LEvi tshirts ",
+        'SQLQuery': "SELECT brand, color, size, stock_quantity FROM t_shirts where brand ='Levi'",
         'SQLResult': "Result of the SQL query",
-        'Answer': "290"
+        'Answer': '''Levi	Red	M	20
+                Levi	Blue	L	30
+                Levi	Black	M	35
+                Levi	White	XS	70"'''
     },
     {
-        'Question': "How much sales amount will be generated if we sell all large size Nike t-shirts today after discounts?",
+        'Question': "list stoke of nike white shoe size available?",
         'SQLQuery': """
-            SELECT SUM(a.total_amount * ((100 - COALESCE(discounts.pct_discount, 0)) / 100)) AS total_revenue 
-            FROM (
-                SELECT SUM(price_per_unit * stock_quantity) AS total_amount, t_shirt_id 
-                FROM t_shirts 
-                WHERE brand = 'Nike' AND size = 'L'
-                GROUP BY t_shirt_id
-            ) a 
-            LEFT JOIN discounts ON a.t_shirt_id = discounts.t_shirt_id
+            SELECT model,size, stock_quantity 
+FROM shoes WHERE model IN ('Nike Air Force', 'Nike Zoom') AND color = 'White';
         """,
         'SQLResult': "Result of the SQL query",
-        'Answer': "290"
+        'Answer': "Nike Air Force	7	22"
     },
     {
         'Question': "What is the total revenue of all products in the inventory?",
@@ -90,10 +87,9 @@ mysql_prompt = """You are a MySQL expert. Given an input question, first create 
     No pre-amble.
     """
     
-# final_prompt = "your are a inventory manager Walmart store ,you got the question from employee. response casually in 1 line with the answer to employee, the is represented in rupees"
 
 final_prompt = """You're the inventory manager at a Walmart store. An employee asks you various questions about stock levels, pricing, and discounts. Respond in a casual and informative way, providing the answer in rupees (₹). 
-Answer only in 1 line relavent to the above Question and given answer
+Answer only in 1 line relavent to the above Question and given answer.if multiple answers return in list table format.
 **Here's a quick rundown to help you out:**
 
 * We have a wide variety of t-shirts (Van Huesen, Levi's, Nike, Adidas) in various sizes (XS, S, M, L, XL) and colors (Red, Blue, Black, White).
